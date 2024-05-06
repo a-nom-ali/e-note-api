@@ -4,8 +4,9 @@ import requests as requests
 from flask import current_app as app
 
 
-def suggest_emoji_sequence(system, prompt):
+def suggest_emoji_sequence(prompt):
     try:
+        system = open("assets/suggestion_system_prompt.txt").read()
         with open('config.json', 'r') as config_file:
             config = json.load(config_file)
 
