@@ -8,7 +8,7 @@ class Config(object):
     FLASK_ENV = os.environ.get('FLASK_ENV')
 
     # Database
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///instance/app.db'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///instance/api.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # JWT

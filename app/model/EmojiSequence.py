@@ -5,6 +5,9 @@ from sqlalchemy import MetaData
 from datetime import datetime
 
 
+class Base:
+    pass
+
 class EmojiSequence(Base):
     __tablename__ = 'emoji_sequences'
 
