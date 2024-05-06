@@ -5,6 +5,8 @@ from openai import OpenAI
 from flask import current_app as app
 
 
+
+
 def suggest_emoji_sequence(system, prompt):
     try:
         with open('config.json', 'r') as config_file:
