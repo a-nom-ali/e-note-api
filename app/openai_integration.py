@@ -1,53 +1,15 @@
+import json
+
 import requests as requests
 from openai import OpenAI
 from flask import current_app as app
 
 
-config = {
-  "OPENAI_API_KEY": "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",
-  "endpoints": {
-    "image_prompt": "http://10.0.0.199:1234/v1/chat/completions",
-    "image": "http://localhost:9821/get-image",
-    "chat_completion": "http://10.0.0.199:1234/v1/chat/completions"
-  },
-  "limits": {
-    "image_prompt": 512,
-    "max_context_tail": 1024,
-    "min_tokens": 150,
-    "max_tokens": 1024
-  },
-  "streaming": {
-    "obs" : {
-      "host": "10.0.0.182",
-      "port": 4455,
-      "password": "ZBIpz077QZtKcAe0"
-    }
-  },
-  "secret": "F9fOYN+r4hDUN0bEZN9zqX6FlzmtNIm3",
-  "oauth": {
-    "google" : {
-      "client_id": "questar.vrzchampions.world",
-      "secret": ""
-    },
-    "facebook" : {
-      "client_id": "questar.vrzchampions.world",
-      "secret": ""
-    }
-  },
-  "temperature": 1,
-  "frequency_penalty": 0.1
-}
-
-
-# Initialize OpenAI with the API key from the environment variable
-client = OpenAI(
-    # defaults to os.environ.get("OPENAI_API_KEY")
-    api_key=config['OPENAI_API_KEY'],
-)
-
-
 def suggest_emoji_sequence(system, prompt):
     try:
+        with open('config.json', 'r') as config_file:
+            config = json.load(config_file)
+
         chat_completion_data = {
             "model": "gpt-3.5-turbo",
             "max_tokens": config["limits"]["max_tokens"],
