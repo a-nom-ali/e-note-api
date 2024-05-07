@@ -7,6 +7,25 @@ from flask import current_app as app
 def suggest_emoji_sequence(prompt):
     try:
         system = open("assets/suggestion_system_prompt.txt").read()
+        return one_shot_prompt(system, prompt)
+    except Exception as e:
+        # Handle OpenAI errors
+        app.logger.error(f"OpenAI API error: {e}")
+        return None
+
+
+def fix_json(prompt):
+    try:
+        system = "Please fix the provided invalid JSON, paying special attention to quotes around keys and values. Respond only with the valid JSON."
+        return one_shot_prompt(system, prompt)
+    except Exception as e:
+        # Handle OpenAI errors
+        app.logger.error(f"OpenAI API error: {e}")
+        return None
+
+
+def one_shot_prompt(system, prompt):
+    try:
         with open('config.json', 'r') as config_file:
             config = json.load(config_file)
 
